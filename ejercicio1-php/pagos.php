@@ -12,7 +12,7 @@ Array indexado:
         0 => 'Daniel',
         1 => 'Ponz Martínez'
     ];
-    
+
 Array asociativo:
     Es un array en el que cada elemento tiene una "clave" personalizada.
     Para separar cada clave valor se utiliza una , exceptuando en el último par.
@@ -214,4 +214,24 @@ $socios = [
 // Prueba mostrar por consola un importe
 // Ejecutar comando php pagos.php en la carpeta ejercicio1-php
 // echo $socios['socio2']['pagos']['2025-03']['importe'];
+
+// Seleccionar el socio que queremos mostrar
+$socio = $socios['socio1'];
+
+
+// Calcular el total pagado
+
+// Inicializar la variable totalPagado a 0 donde se sumará todo lo que esté en estado Pagado
+$totalPagado = 0;
+// Bucle foreach que recorrerá todos los pagos del socio y almacenándolos en la variable $pago temporalmente
+// en cada iteración
+foreach ($socio['pagos'] as $pago) {
+    // Condición de si el estado es Pagado, suma el importe a $totalPagado
+    if ($pago['estado'] === 'Pagado') {
+        $totalPagado = $totalPagado + $pago['importe'];
+    }
+}
+
+// Prueba mostrar por consola un $totalPagado
+// echo $totalPagado;
 ?>
