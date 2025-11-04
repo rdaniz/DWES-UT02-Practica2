@@ -1,16 +1,47 @@
 <?php
 
 /*
+Array indexado:
+    Es un array donde cada elemento tiene un índice numérico automático, que empieza en
+    0 a menos que se defina.
+    Ejemplo:
+    $socio = ['Daniel', 'Ponz Martínez'];
+
+    Es lo mismo que:
+    $socio = [
+        0 => 'Daniel',
+        1 => 'Ponz Martínez'
+    ];
+    
 Array asociativo:
-   Es un array en el que cada elemento tiene una "clave" personalizada.
+    Es un array en el que cada elemento tiene una "clave" personalizada.
+    Para separar cada clave valor se utiliza una , exceptuando en el último par.
+    Ejemplo:
+    $socio = [
+       'nombre' => 'Daniel',
+       'apellidos' => 'Ponz Martínez'
+    ];
 
 Array multidimensional:
-   Es un array que contiene otros arrays.
+    Es un array que contiene otros arrays.
+    Para separar cada clave valor se utiliza una , exceptuando en el último par.
+    Para separar cada array se utiliza una , exceptuando en el último par.
+    Ejemplo:
+        $socios = [
+        'socio1' => [
+            'nombre' => 'Daniel',
+            'apellidos' => 'Ponz Martínez'
+        ],
+        'socio2' => [
+            'nombre' => 'Juan',
+            'apellidos' => 'Sánchez Burriel'
+        ],
+   ];
 */
 
-// Creación de array asociativo multidimensional
-
+// Array asociativo multidimensional $socios
 $socios = [
+    // Nuevo array asociatico multidimensional [socio1] dentro de $socios
     'socio1' => [
         'id' => 's1',
         'nombre' => 'Daniel',
@@ -18,7 +49,9 @@ $socios = [
         'dni' => '11111111V',
         'email' => 'dponzmv@fpvirtualaragon.es',
         'telefono' => '611111111',
+        // Nuevo array asociativo multidimensional [pagos] dentro de $socios['socio1']
         'pagos' => [
+            // Nuevo array asociativo [2025-01] dentro de $socios['socio1']['pagos']
             '2025-01' => [
                 'mes' => 'Enero',
                 'importe' => 10,
@@ -29,16 +62,70 @@ $socios = [
                 'mes' => 'Febrero',
                 'importe' => 20,
                 'estado' => 'Pagado',
-                'fecha_pago' => '2025-02-20'
+                'fecha_pago' => '2025-02-05'
             ],
             '2025-03' => [
                 'mes' => 'Marzo',
+                'importe' => 30,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-03-10'
+            ],
+            '2025-04' => [
+                'mes' => 'Abril',
+                'importe' => 10,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-04-05'
+            ],
+            '2025-05' => [
+                'mes' => 'Mayo',
+                'importe' => 20,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-05-10'
+            ],
+            '2025-06' => [
+                'mes' => 'Junio',
+                'importe' => 30,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-06-05'
+            ],
+            '2025-07' => [
+                'mes' => 'Julio',
+                'importe' => 10,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-07-10'
+            ],
+            '2025-08' => [
+                'mes' => 'Agosto',
+                'importe' => 20,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-08-05'
+            ],
+            '2025-09' => [
+                'mes' => 'Septiembre',
+                'importe' => 30,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-09-10'
+            ],
+            '2025-10' => [
+                'mes' => 'Octubre',
+                'importe' => 10,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-10-05'
+            ],
+            '2025-11' => [
+                'mes' => 'Noviembre',
+                'importe' => 20,
+                'estado' => 'Pendiente',
+                'fecha_pago' => null
+            ],
+            '2025-12' => [
+                'mes' => 'Diciembre',
                 'importe' => 30,
                 'estado' => 'Pendiente',
                 'fecha_pago' => null
             ]
         ]
-            ],
+    ],
 
     'socio2' => [
         'id' => 's2',
@@ -50,19 +137,73 @@ $socios = [
         'pagos' => [
             '2025-01' => [
                 'mes' => 'Enero',
-                'importe' => 50,
-                'estado' => 'Pendiente',
-                'fecha_pago' => null
+                'importe' => 10,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-01-10'
             ],
             '2025-02' => [
                 'mes' => 'Febrero',
-                'importe' => 60,
+                'importe' => 20,
                 'estado' => 'Pagado',
-                'fecha_pago' => '2025-02-22'
+                'fecha_pago' => '2025-02-05'
             ],
             '2025-03' => [
                 'mes' => 'Marzo',
+                'importe' => 30,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-03-10'
+            ],
+            '2025-04' => [
+                'mes' => 'Abril',
                 'importe' => 10,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-04-05'
+            ],
+            '2025-05' => [
+                'mes' => 'Mayo',
+                'importe' => 20,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-05-10'
+            ],
+            '2025-06' => [
+                'mes' => 'Junio',
+                'importe' => 30,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-06-05'
+            ],
+            '2025-07' => [
+                'mes' => 'Julio',
+                'importe' => 10,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-07-10'
+            ],
+            '2025-08' => [
+                'mes' => 'Agosto',
+                'importe' => 20,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-08-05'
+            ],
+            '2025-09' => [
+                'mes' => 'Septiembre',
+                'importe' => 30,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-09-10'
+            ],
+            '2025-10' => [
+                'mes' => 'Octubre',
+                'importe' => 10,
+                'estado' => 'Pagado',
+                'fecha_pago' => '2025-10-05'
+            ],
+            '2025-11' => [
+                'mes' => 'Noviembre',
+                'importe' => 20,
+                'estado' => 'Pendiente',
+                'fecha_pago' => null
+            ],
+            '2025-12' => [
+                'mes' => 'Diciembre',
+                'importe' => 30,
                 'estado' => 'Pendiente',
                 'fecha_pago' => null
             ]
