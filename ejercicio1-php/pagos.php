@@ -1,5 +1,4 @@
 <?php
-
 /*
 Array indexado:
     Es un array donde cada elemento tiene un índice numérico automático, que empieza en
@@ -38,6 +37,10 @@ Array multidimensional:
         ],
    ];
 */
+
+?>
+
+<?php
 
 // Array asociativo multidimensional $socios
 $socios = [
