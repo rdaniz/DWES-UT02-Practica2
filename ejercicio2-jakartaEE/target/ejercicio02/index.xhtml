@@ -1,56 +1,109 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core"
-      xmlns:ui="jakarta.faces.facelets"
-      xmlns:c="jakarta.tags.core">
-      
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core"
+    xmlns:ui="jakarta.faces.facelets" xmlns:c="jakarta.tags.core">
+
 <h:head>
-    <title>Usuarios y Pagos - JSF</title>
-    <meta charset="UTF-8"/>
+    <title>Ejercicio2 - Jakarta EE</title>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            font-size: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid;
+            text-align: center;
+            padding: 8px;
+        }
+    </style>
+
 </h:head>
 
 <h:body>
-    <h1>Usuarios y pagos mensuales</h1>
+    <h1>Lista de usuarios y pagos mensuales </h1>
+    <!--Quito el código antiguo ya que aunque esté comentado lo intenta ejecutar-->
 
-    <!-- Bucle sobre la lista de usuarios -->
+    <!-- Práctica 2: 
+        * Añade aquí la sección para mostrar la lista de usuarios.
+        * Comprueba si quieres primero que se muestra uno y después genera a todos.
+        * Estudia como se publican aquí los elementos de un objeto dentro de una clase.
+        * Utiliza la aproximación que prefieras para gestionar el total de pagos del usuario. por ejemplo, 
+          puedes usar un bucle ui:repeat y variables, o crear una función dentro del objeto que calcule el total. 
+    -->
+
+    <!-- Bucle sobre la lista de usuarios con ui:repeat-->
+    <!--Por cada usuario realizo una de las siguientes acciones-->
     <ui:repeat value="#{helloBean.usuarios}" var="u">
 
-        <!-- Datos personales como lista -->
+        <!-- Datos personales-->
         <h2>Datos personales de #{u.nombre} #{u.apellidos}</h2>
-        <ul>
-            <li><b>DNI:</b> #{u.dni}</li>
-            <li><b>Email:</b> #{u.email}</li>
-            <li><b>Edad:</b> #{u.edad}</li>
-        </ul>
+
+        <!-- No uso h:dataTable porque no es una colección, uso una tabla html-->
+        <table>
+            <tr>
+                <th>DNI</th>
+                <td>#{u.dni}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>#{u.email}</td>
+            </tr>
+            <tr>
+                <th>Edad</th>
+                <td>#{u.edad}</td>
+            </tr>
+        </table>
 
         <!-- Pagos mensuales del usuario -->
         <h3>Pagos mensuales</h3>
-        <h:dataTable value="#{u.pagos.entrySet()}" var="entry" border="1">
+
+        <!-- Uso h:dataTable porque es una colección-->
+        <!-- Uso entrySet() para recorrer el LinkedHashMap-->
+        <h:dataTable value="#{u.pagos.entrySet()}" var="up">
             <h:column>
+                <!-- Columna 1. Cabecera e inserto clave-->
                 <f:facet name="header">Mes</f:facet>
-                #{entry.key}
+                #{up.key}
             </h:column>
             <h:column>
+                <!-- Columna 2. Cabecera e inserto valor con condiciones.
+                 Si es distinto de nulo renderizo el texto normal.
+                 Si es nulo renderizo NO PAGADO y el color del texto rojo-->
                 <f:facet name="header">Importe</f:facet>
-                <h:outputText value="#{entry.value}" rendered="#{entry.value != null}" />
-                <h:outputText value="NO PAGADO" style="color:red;" rendered="#{entry.value == null}" />
+                <!-- <h:outputText> Componente de salida de texto, equivalente a escribir un <span> con el valor de la expresión.
+                    Se usa cuando se quieren mostrar datos concretos.
+                    Es necesario porque el valor es dinámico-->
+                <h:outputText value="#{up.value}" rendered="#{up.value != null}" />
+                <h:outputText value="NO PAGADO" rendered="#{up.value == null}" style="color:red;" />
             </h:column>
         </h:dataTable>
 
-        <!-- Total anual y mensaje condicional -->
+        <!-- Total anual-->
         <h3>Total anual: #{helloBean.calcularTotal(u)} €</h3>
 
+        <!--Mensaje condicional
+        <h:panelGroup> es un contenedor de componentes JSF
+        Se usa para mostrar un mensaje fijo si se cumple la condición (total < 100)-->
         <h:panelGroup rendered="#{helloBean.calcularTotal(u) lt 100}">
             <span style="color:red;">El usuario no está al día con la cuota</span>
         </h:panelGroup>
 
+        <!--<h:panelGroup> es un contenedor de componentes JSF
+        Se usa para mostrar un mensaje fijo si se cumple la condición (total < 100)-->
         <h:panelGroup rendered="#{helloBean.calcularTotal(u) ge 100}">
             <span style="color:green;">El usuario está al corriente de pagos</span>
         </h:panelGroup>
 
-        <hr/>
+        <br />
     </ui:repeat>
 
 </h:body>
+
 </html>
