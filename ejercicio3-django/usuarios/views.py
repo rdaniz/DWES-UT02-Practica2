@@ -49,10 +49,14 @@ def usuario_view(request):
 
     # Mostrar pagos mes a mes
     print("=== Pagos de la asociación ===")
+    #Variable pagos_detalle para almacenar los meses y pagos
+    pagos_detalle = ""
     total_pagado = 0
     for mes, cantidad in usuario["pagos"].items():
         estado = "PAGADO" if cantidad > 0 else "PENDIENTE"
         print(f"{mes.capitalize():<10}: {cantidad} € -> {estado}")
+        #Añadir al string vacío pagos_detalle el mes y la cantidad como una lista
+        pagos_detalle = pagos_detalle +(f"<li>{mes.capitalize():<10}: {cantidad} € -> {estado}</li>")
         total_pagado += cantidad
 
     print("\nTotal anual pagado:", total_pagado, "€")
@@ -64,12 +68,17 @@ def usuario_view(request):
             <body>
                 <h1>Información personal</h1>
                 <!--Para incluir datos que se encuentran en la vista, usamos llaves como se ve a continuación -->
-                <p><strong>Mi Nombre:</strong> {usuario['nombre']}</p>
+                <p><strong>Nombre:</strong> {usuario['nombre']}</p>
                 <p><strong>Apellidos:</strong> {usuario['apellidos']}</p>
                 <p><strong>DNI:</strong> {usuario['dni']}</p>
                 <p><strong>Email:</strong> {usuario['email']}</p>
                 <p><strong>Teléfono:</strong> {usuario['telefono']}</p>
-                <p><strong>Total pagado:</strong> {total_pagado}</p>            
+
+                <h2>Detalle de los pagos</h2>
+                <ul>
+                    {pagos_detalle}
+                </ul>
+                <p><strong>Total pagado:</strong> {total_pagado} €</p>            
             </body>
         </html>
         """
