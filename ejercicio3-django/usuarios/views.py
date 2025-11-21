@@ -25,6 +25,7 @@ def usuario_view(request):
     {
         "nombre": "Laura",
         "apellidos": "Gómez Pérez",
+        "edad": "20",
         "dni": "12345678A",
         "email": "laura.gomez@example.com",
         "telefono": "654321987",
@@ -46,6 +47,12 @@ def usuario_view(request):
     """
     # Cargar JSON a un diccionario de Python
     usuario = json.loads(usuario_json)
+
+    # Cambiar color si edad es >=18
+    # Definir la ead como variable numérica para poder hacer la condición (no puedo con String)
+    edad = int(usuario['edad'])
+    # Variable color_edad que cambia según condición
+    color_edad = "green" if edad >= 18 else ""
 
     # Mostrar pagos mes a mes
     print("=== Pagos de la asociación ===")
@@ -70,6 +77,11 @@ def usuario_view(request):
                 <!--Para incluir datos que se encuentran en la vista, usamos llaves como se ve a continuación -->
                 <p><strong>Nombre:</strong> {usuario['nombre']}</p>
                 <p><strong>Apellidos:</strong> {usuario['apellidos']}</p>
+                
+                <!--Añadir estilo de color con la variable color_edad y la condición-->
+                <!--Pongo un span con la edad porque si le añado el color al párrafo cambia toda la línea-->
+                <p><strong>Edad:</strong> <span style="color:{color_edad};">{usuario['edad']}</edad></p>
+
                 <p><strong>DNI:</strong> {usuario['dni']}</p>
                 <p><strong>Email:</strong> {usuario['email']}</p>
                 <p><strong>Teléfono:</strong> {usuario['telefono']}</p>
